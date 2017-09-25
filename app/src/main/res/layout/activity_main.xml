@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_bright"
+    tools:context="com.kuri.armr.MainActivity">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/accountPresentText"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/accountPresentText"
+        android:layout_marginTop="59dp"
+        android:text="WELCOME TO APP RUN MOBILE ROBOT"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold|italic"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/accountPresentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcomeText"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="96dp"
+        android:layout_toLeftOf="@+id/registerButton"
+        android:layout_toStartOf="@+id/registerButton"
+        android:fontFamily="serif-monospace"
+        android:text="REGISTERED WITH US?"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/newUserText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/accountPresentText"
+        android:layout_alignStart="@+id/accountPresentText"
+        android:layout_below="@+id/registerButton"
+        android:layout_marginTop="80dp"
+        android:fontFamily="serif-monospace"
+        android:text="LOGIN"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/registerButton"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/accountPresentText"
+        android:layout_alignBottom="@+id/accountPresentText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:onClick="openRegisterPageClick"
+        android:text="Click Me to Register"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newUserText"
+        android:layout_alignBottom="@+id/newUserText"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_toEndOf="@+id/newUserText"
+        android:layout_toRightOf="@+id/newUserText"
+        android:onClick="openLoginPageClick"
+        android:text="Click Me and Login"
+        android:visibility="visible" />
+
+</RelativeLayout>
