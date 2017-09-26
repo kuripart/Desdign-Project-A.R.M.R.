@@ -22,7 +22,7 @@ import java.util.UUID;
 public class ControlsActivity extends AppCompatActivity {
 
 
-    private static final String TAG = "bluetooth1";;
+    private static final String TAG = "bluetooth1";
     Button bluetoothButton, cwBtn, ccwBtn, servoBtn, cwBtn2, ccwBtn2, allcwBtn, allccwBtn;
     final int IDENTIFIER = 0;
     private final String DEVICE_ADDRESS = "98:D3:31:FD:52:00";//"F0:C7:7F:ED:FB:14";//HM-10   //"98:D3:31:FD:52:00"; //HC-06
@@ -33,7 +33,8 @@ public class ControlsActivity extends AppCompatActivity {
     private OutputStream outputStream;
     BluetoothDevice device;
     boolean connectionSet;
-
+    boolean present = false;
+    boolean connected = false;
     String motorSignal;
 
     @Override
@@ -52,6 +53,183 @@ public class ControlsActivity extends AppCompatActivity {
 
         connectionSet = false;
 
+        if(present && connected){ // to avoid breaking of the app when no connection has been established and one of the controls buttons get pressed.
+            cwBtn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "1";
+
+                        try {
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            ccwBtn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "2";
+
+                        try{
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            cwBtn2.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "3";
+
+                        try {
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            ccwBtn2.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "4";
+
+                        try {
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            allcwBtn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "5";
+
+                        try {
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+
+            allccwBtn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "6";
+
+                        try {
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });
+
+            /*servoBtn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
+                        motorSignal = "3";
+
+                        try{
+                            outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
+                        motorSignal = "10";
+                        try{
+                            outputStream.write(motorSignal.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+                    return false;
+                }
+            });*/
+        }
 
         bluetoothButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,191 +243,12 @@ public class ControlsActivity extends AppCompatActivity {
             }
         });
 
-
-        cwBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "1";
-
-                    try {
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-        ccwBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "2";
-
-                    try{
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-        cwBtn2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "3";
-
-                    try {
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-        ccwBtn2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "4";
-
-                    try {
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-        allcwBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "5";
-
-                    try {
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-
-        allccwBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "6";
-
-                    try {
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });
-
-
-
-
-        /*servoBtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){ //MotionEvent.ACTION_DOWN is when you hold a button down
-                    motorSignal = "3";
-
-                    try{
-                        outputStream.write(motorSignal.getBytes()); //transmits the value of command to the bluetooth module
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){ //MotionEvent.ACTION_UP is when you release a button
-                    motorSignal = "10";
-                    try{
-                        outputStream.write(motorSignal.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                return false;
-            }
-        });*/
     }
 
 
     public boolean checkBluetoothDevice(){
 
-        boolean present = false;
+
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(bluetoothAdapter!=null){ //check whether device supports bluetooth
             if(!bluetoothAdapter.isEnabled()) { //check whether bluetooth enabled
@@ -281,7 +280,7 @@ public class ControlsActivity extends AppCompatActivity {
 
 
     public boolean BTconnect(){
-        boolean connected = true;
+
 
         //To create a BluetoothSocket for connecting to a known device,
         //use BluetoothDevice.createRfcommSocketToServiceRecord().
@@ -297,6 +296,7 @@ public class ControlsActivity extends AppCompatActivity {
             socket = device.createRfcommSocketToServiceRecord(PORT_UUID); //Creates a socket to handle the outgoing connection
             //socket = createBluetoothSocket(device);
             socket.connect();
+            connected = true;
             Toast.makeText(ControlsActivity.this, "Connection to bluetooth device successful", Toast.LENGTH_LONG).show();
         }catch(IOException e) {
             e.printStackTrace();
