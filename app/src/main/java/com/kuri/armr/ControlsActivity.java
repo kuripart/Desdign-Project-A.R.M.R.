@@ -53,7 +53,8 @@ public class ControlsActivity extends AppCompatActivity {
 
         connectionSet = false;
 
-        if(present && connected){ // to avoid breaking of the app when no connection has been established and one of the controls buttons get pressed.
+        //if(present && connected){ // to avoid breaking of the app when no connection has been established and one of the controls buttons get pressed.
+        //NOTE: This condition causes an error as the phone will not be able to send data stream continuously.
             cwBtn.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -229,7 +230,7 @@ public class ControlsActivity extends AppCompatActivity {
                     return false;
                 }
             });*/
-        }
+        //}
 
         bluetoothButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -294,7 +295,7 @@ public class ControlsActivity extends AppCompatActivity {
 
         try{
             socket = device.createRfcommSocketToServiceRecord(PORT_UUID); //Creates a socket to handle the outgoing connection
-            //socket = createBluetoothSocket(device);
+            socket = createBluetoothSocket(device);
             socket.connect();
             connected = true;
             Toast.makeText(ControlsActivity.this, "Connection to bluetooth device successful", Toast.LENGTH_LONG).show();
